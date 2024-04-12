@@ -11,7 +11,7 @@ class WeatherListRepositoryImpl(private val remoteWeatherListDatasource: RemoteW
         try {
             return remoteWeatherListDatasource.getWeatherListRemoteDatasource()
         } catch (e: Exception){
-            println(e)
+            println("--------------------------->$e")
         }
         return null
     }
