@@ -1,5 +1,7 @@
 package com.example.weatherglobantapp.data
 
+import com.example.weatherglobantapp.data.model.Weather
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 interface ApiService {
@@ -11,8 +13,6 @@ interface ApiService {
         @Query("appid") appId: String = API_KEY.API_KEY,
         @Query("lat") lat:Int,
         @Query("long") long:Int,
-    ){
-
-    }
+    ) : Deferred<List<Weather>>
 }
 
