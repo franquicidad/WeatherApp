@@ -7,7 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.Orientation
 import com.example.weatherglobantapp.databinding.FragmentHomeBinding
+import com.example.weatherglobantapp.ui.adapters.WeatherListAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collect
 
 class HomeFragment : Fragment() {
 
@@ -27,10 +34,14 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        lifecycleScope.async(Dispatchers.Main){
+            homeViewModel.getWeatherList()
+            homeViewModel.weather.collect{
+                _binding!!.weatherDetailRecyclerView.apply {
+                    adapter = it?.let { listWeather -> WeatherListAdapter(listWeather) }
+                    layoutManager = LinearLayoutManager(context)
+                }
+            }
         }
         return root
     }
