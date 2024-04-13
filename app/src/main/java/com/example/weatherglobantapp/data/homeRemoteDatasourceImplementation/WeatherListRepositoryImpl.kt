@@ -5,8 +5,9 @@ import com.example.weatherglobantapp.domain.homeRemoteWeatherListDatasource.Remo
 import com.example.weatherglobantapp.domain.homeRemoteWeatherListDatasource.WeatherListRepository
 import kotlinx.coroutines.Deferred
 import java.lang.Exception
+import javax.inject.Inject
 
-class WeatherListRepositoryImpl(private val remoteWeatherListDatasource: RemoteWeatherListDatasource) : WeatherListRepository{
+class WeatherListRepositoryImpl @Inject constructor(private val remoteWeatherListDatasource: RemoteWeatherListDatasource) : WeatherListRepository{
     override suspend fun getWeatherListFromRemote(): Deferred<List<Weather>>? {
         try {
             return remoteWeatherListDatasource.getWeatherListRemoteDatasource()
