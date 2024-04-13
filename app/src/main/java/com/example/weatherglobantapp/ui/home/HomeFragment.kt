@@ -1,15 +1,13 @@
-package com.example.weatherglobantapp.ui.dashboard
+package com.example.weatherglobantapp.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.Orientation
 import com.example.weatherglobantapp.databinding.FragmentHomeBinding
 import com.example.weatherglobantapp.ui.adapters.WeatherListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 @AndroidEntryPoint
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null

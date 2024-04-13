@@ -1,7 +1,5 @@
-package com.example.weatherglobantapp.ui.dashboard
+package com.example.weatherglobantapp.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherglobantapp.data.model.Weather

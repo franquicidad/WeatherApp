@@ -19,17 +19,18 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
+    // TODO:Erase / in url
+
     @Provides
     @Singleton
     fun provideAnalyticsService(
         // Potential dependencies of this type
     ): ApiService {
         return Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/weather")
+            .baseUrl("https://api.openweathermap.org/data/2.5/weather/")
             .build()
             .create(ApiService::class.java)
     }
-
     @Provides
     fun provideRemoteWeatherList (apiService: ApiService): RemoteWeatherListDatasource{
         return RemoteWeatherListDatasourceImpl(apiService = apiService)
