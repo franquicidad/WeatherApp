@@ -1,18 +1,25 @@
 package com.example.weatherglobantapp.data
 
-import com.example.weatherglobantapp.data.model.Weather
-import kotlinx.coroutines.Deferred
+import com.example.weatherglobantapp.dataModel.landing.Weather
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+
 interface ApiService {
-    companion object API_KEY{
-            const val API_KEY ="fb49a239d7e734d19560c5efb43e1ff2"
+    companion object API_KEY {
+        const val API_KEY = "8027ed96953ca9aa9b376b897799acca"
     }
-    @GET()
+
+    @GET("weather")
     suspend fun getWeatherItems(
-        @Query("appid") appId: String = API_KEY.API_KEY,
-        @Query("lat") lat:Int,
-        @Query("long") long:Int,
-    ) : Deferred<List<Weather>>
+        @Query("lat") lat:String,
+        @Query("lon") lon:String,
+    ) : Weather
+
+    @GET("forecast")
+    suspend fun getForecastItems(
+        @Query("lat") lat:String,
+        @Query("lon") lon:String,
+    ) : Weather
 }
 

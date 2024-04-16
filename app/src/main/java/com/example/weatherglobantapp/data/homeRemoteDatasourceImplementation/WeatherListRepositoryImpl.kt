@@ -1,20 +1,18 @@
 package com.example.weatherglobantapp.data.homeRemoteDatasourceImplementation
 
-import com.example.weatherglobantapp.data.model.Weather
-import com.example.weatherglobantapp.domain.homeRemoteWeatherListDatasource.RemoteWeatherListDatasource
-import com.example.weatherglobantapp.domain.homeRemoteWeatherListDatasource.WeatherListRepository
-import kotlinx.coroutines.Deferred
-import java.lang.Exception
+import com.example.weatherglobantapp.dataModel.landing.Weather
+import com.example.weatherglobantapp.domain.RemoteWeatherListDatasource
+import com.example.weatherglobantapp.domain.WeatherListRepository
 import javax.inject.Inject
 
-class WeatherListRepositoryImpl @Inject constructor(private val remoteWeatherListDatasource: RemoteWeatherListDatasource) : WeatherListRepository{
-    override suspend fun getWeatherListFromRemote(): Deferred<List<Weather>>? {
-        try {
-            return remoteWeatherListDatasource.getWeatherListRemoteDatasource()
-        } catch (e: Exception){
-            println("--------------------------->$e")
-        }
-        return null
+class WeatherListRepositoryImpl @Inject constructor(private val remoteWeatherListDatasource: RemoteWeatherListDatasource) :
+    WeatherListRepository {
+    override suspend fun getWeatherListFromRemote(lat: String, lon: String): Weather? {
+        return runCatching {
+            remoteWeatherListDatasource.getWeatherListRemoteDatasource(lat,lon)
+        }.onFailure {
+            println(it.message)
+        }.getOrNull()
     }
-
 }
+
