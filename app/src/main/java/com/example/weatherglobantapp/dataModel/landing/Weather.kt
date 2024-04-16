@@ -1,4 +1,4 @@
-package com.example.weatherglobantapp.data.model
+package com.example.weatherglobantapp.dataModel.landing
 
 data class Weather(
     val base: String,
@@ -7,7 +7,7 @@ data class Weather(
     val coord: Coord,
     val dt: Int,
     val id: Int,
-    val main: Main,
+     val main: Main,
     val name: String,
     val rain: Rain,
     val sys: Sys,

@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherglobantapp.databinding.FragmentHomeBinding
 import com.example.weatherglobantapp.ui.adapters.WeatherListAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 
 class HomeFragment : Fragment() {
@@ -34,15 +34,16 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        lifecycleScope.async(Dispatchers.Main){
-            homeViewModel.getWeatherList()
-            homeViewModel.weather.collect{
-                _binding!!.weatherDetailRecyclerView.apply {
-                    adapter = it?.let { listWeather -> WeatherListAdapter(listWeather) }
-                    layoutManager = LinearLayoutManager(context)
-                }
+
+        homeViewModel.getWeatherList()
+        homeViewModel.weather.observe(viewLifecycleOwner) {
+            println(it)
+            binding.weatherDetailRecyclerView.apply {
+                adapter = WeatherListAdapter(it?.weather)
+                layoutManager = LinearLayoutManager(context)
             }
         }
+
         return root
     }
 
