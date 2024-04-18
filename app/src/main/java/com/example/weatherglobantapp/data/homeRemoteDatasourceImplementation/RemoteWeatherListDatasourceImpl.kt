@@ -9,7 +9,8 @@ class RemoteWeatherListDatasourceImpl @Inject constructor(private val apiService
     RemoteWeatherListDatasource {
     override suspend fun getWeatherListRemoteDatasource(lat: String, lon: String): Weather? {
         return runCatching {
-            apiService.getWeatherItems(lat, lon)
+
+            apiService.getWeatherItems(apiKey = ApiService.API, lat =  lat, lon =  lon)
         }.onFailure {
             println(it.message)
         }.getOrNull()

@@ -1,7 +1,7 @@
 package com.example.weatherglobantapp.domain
 
-import com.example.weatherglobantapp.dataModel.landing.Weather
+import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
 
 interface RemoteForecastListDatasource {
-     suspend fun getForecastListRemoteDatasource(lat:String, lon:String): Weather?
+     suspend fun getForecastListRemoteDatasource(lat:String, lon:String): Forecast?
 }

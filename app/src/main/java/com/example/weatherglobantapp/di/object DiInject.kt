@@ -2,8 +2,12 @@ package com.example.weatherglobantapp.di
 
 import com.example.weatherglobantapp.data.ApiService
 import com.example.weatherglobantapp.data.HttpLandingInterceptor
+import com.example.weatherglobantapp.data.forecastRemoteRepositoryImplementation.ForecastListRepositoryImpl
+import com.example.weatherglobantapp.data.forecastRemoteRepositoryImplementation.RemoteForecastListDatasourceImpl
 import com.example.weatherglobantapp.data.homeRemoteDatasourceImplementation.RemoteWeatherListDatasourceImpl
 import com.example.weatherglobantapp.data.homeRemoteDatasourceImplementation.WeatherListRepositoryImpl
+import com.example.weatherglobantapp.domain.ForecastListRepository
+import com.example.weatherglobantapp.domain.RemoteForecastListDatasource
 import com.example.weatherglobantapp.domain.RemoteWeatherListDatasource
 import com.example.weatherglobantapp.domain.WeatherListRepository
 import dagger.Module
@@ -42,9 +46,17 @@ object ApiModule {
     fun provideRemoteWeatherList(apiService: ApiService): RemoteWeatherListDatasource {
         return RemoteWeatherListDatasourceImpl(apiService = apiService)
     }
+    @Provides
+    fun provideRemoteForecastDatasource (apiService: ApiService): RemoteForecastListDatasource{
+        return RemoteForecastListDatasourceImpl(apiService)
+    }
 
     @Provides
     fun provideWeatherListRepository(remoteWeatherListDatasource: RemoteWeatherListDatasource): WeatherListRepository {
         return WeatherListRepositoryImpl(remoteWeatherListDatasource)
+    }
+    @Provides
+    fun provideRemoteListRepository( remoteForecastListDatasource: RemoteForecastListDatasource): ForecastListRepository {
+        return ForecastListRepositoryImpl(remoteForecastListDatasource)
     }
 }

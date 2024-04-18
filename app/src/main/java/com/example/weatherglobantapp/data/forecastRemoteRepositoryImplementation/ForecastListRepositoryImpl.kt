@@ -1,13 +1,12 @@
 package com.example.weatherglobantapp.data.forecastRemoteRepositoryImplementation
 
-import com.example.weatherglobantapp.dataModel.landing.Weather
+import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
+import com.example.weatherglobantapp.domain.ForecastListRepository
 import com.example.weatherglobantapp.domain.RemoteForecastListDatasource
-import com.example.weatherglobantapp.domain.WeatherListRepository
 import javax.inject.Inject
 
-class ForecastListRepositoryImpl @Inject constructor(private val remoteForecastListDatasource: RemoteForecastListDatasourceImpl) :
-    RemoteForecastListDatasource {
-    override suspend fun getForecastListRemoteDatasource(lat: String, lon: String): Weather? {
+class ForecastListRepositoryImpl @Inject constructor(private val remoteForecastListDatasource: RemoteForecastListDatasource) : ForecastListRepository {
+        override suspend fun getForecastListFromRemote(lat: String, lon: String): Forecast? {
         return runCatching {
             remoteForecastListDatasource.getForecastListRemoteDatasource(lat,lon)
         }.onFailure {

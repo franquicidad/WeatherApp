@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherglobantapp.dataModel.landing.Weather
+import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
 import com.example.weatherglobantapp.domain.ForecastListRepository
 import com.example.weatherglobantapp.domain.WeatherListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,8 +21,8 @@ class HomeViewModel @Inject constructor(private val repository: WeatherListRepos
     private val _weather = MutableLiveData<Weather?>(null)
     val weather: LiveData<Weather?> = _weather
 
-    private val _forecast = MutableStateFlow<Weather?>(null)
-    val forecast: StateFlow<Weather?> = _forecast
+    private val _forecast = MutableStateFlow<Forecast?>(null)
+    val forecast: StateFlow<Forecast?> = _forecast
 
     fun getWeatherList(lat:String, long:String) {
         viewModelScope.launch(Dispatchers.IO) {

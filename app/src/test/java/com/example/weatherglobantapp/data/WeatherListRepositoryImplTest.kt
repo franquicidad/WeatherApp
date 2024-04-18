@@ -1,9 +1,11 @@
 package com.example.weatherglobantapp.data
 
+import android.content.res.Resources.NotFoundException
 import com.example.weatherglobantapp.domain.RemoteWeatherListDatasource
 import com.example.weatherglobantapp.mocks.Mock
 import com.google.common.truth.Truth
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -21,7 +23,19 @@ class WeatherListRepositoryImplTest {
             Truth.assertThat(weatherMock).isEqualTo(list)
 
         }
+    }
 
+    // null
+    @Test
+    fun `x`(){
+        runTest{
+
+            try {
+                remoteWeatherListDatasource.getWeatherListRemoteDatasource(,)
+            } catch (e:NotFoundException){
+
+            }
+        }
     }
 
 }
