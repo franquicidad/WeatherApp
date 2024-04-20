@@ -76,7 +76,9 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation ("io.coil-kt:coil-compose:2.0.0")
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 
+    testImplementation("app.cash.turbine:turbine:0.11.0")
 
 
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta")

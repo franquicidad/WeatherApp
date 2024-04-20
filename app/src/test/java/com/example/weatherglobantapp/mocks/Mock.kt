@@ -7,9 +7,11 @@ import com.example.weatherglobantapp.dataModel.landing.Rain
 import com.example.weatherglobantapp.dataModel.landing.Sys
 import com.example.weatherglobantapp.dataModel.landing.Weather
 import com.example.weatherglobantapp.dataModel.landing.Wind
+import com.example.weatherglobantapp.dataModel.landing.forecast.City
+import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
 
 object Mock {
-    val weather = Weather(
+     val weather = Weather(
         base = "",
         clouds = Clouds(5),
         cod = 5,
@@ -39,4 +41,6 @@ object Mock {
     val listWeather = listOf<Weather>(
         weather
     )
+    val forecastMock = Forecast(City(com.example.weatherglobantapp.dataModel.landing.forecast.Coord(2.5,2.3),"",1,"",3,3,3,3),3,"",
+        listOf(),3)
 }

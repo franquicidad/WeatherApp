@@ -1,5 +1,6 @@
 package com.example.weatherglobantapp.data
 
+import com.example.weatherglobantapp.domain.RemoteWeatherListDatasource
 import com.example.weatherglobantapp.mocks.Mock
 import com.example.weatherglobantapp.ui.home.HomeViewModel
 import com.google.common.truth.Truth.assertThat
@@ -10,19 +11,24 @@ import org.junit.Test
 
 
 class RemoteWeatherListDatasourceImplTest {
-    private val apiService = mockk<ApiService>()
-    private val viewModel = mockk<HomeViewModel>(relaxed = true)
+    private val apiService = mockk<ApiService>(relaxed = true)
+    private val remoteWeatherListDatasource = mockk<RemoteWeatherListDatasource>(relaxed = true)
 
     @Test
     fun `given the api response when the apiService instance inyected then call the function`() =
-
         runTest {
-            val weatherMock = Mock.listWeather
-            val list = apiService.getWeatherItems()
-            coEvery { apiService.getWeatherItems() }.returns(list)
+            val weatherMock = Mock.weather
+            coEvery { apiService.getWeatherItems("1", "1", "1") }.returns(weatherMock)
+            coEvery {
+                remoteWeatherListDatasource.getWeatherListRemoteDatasource(
+                    "1",
+                    "1"
+                )
+            }.returns(weatherMock)
+            val list = apiService.getWeatherItems("1", "1", "1")
 
-            apiService.getWeatherItems()
+            remoteWeatherListDatasource.getWeatherListRemoteDatasource("1", "1")
             assertThat(weatherMock).isEqualTo(list)
-
+            assertThat(list).isNotNull()
         }
 }
