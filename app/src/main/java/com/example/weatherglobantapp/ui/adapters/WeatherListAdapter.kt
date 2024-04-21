@@ -46,9 +46,7 @@ class WeatherListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         val faren =convert.convertFarenheitToDegree(forecast.list[position].main.temp).toString()
         val newFaren = faren.substring(0,7)
         binding.hour.text =  newClock
-        binding.degrees.text = newFaren
-//        binding.hour.text = convert.convertTimeToClock(returnGivenString(list,position).toLong()).toString()
-//        binding.degrees.text = convert.convertFarenheitToDegree(returnGivenString(list,position).toInt()).toString()
+        binding.degrees.text = newFaren + " Fº"
         when (list[position].icon) {
           "01n" -> {
                 binding.iconViewRecyclerview.setImageDrawable(inflateDrawable(R.drawable.w01n))

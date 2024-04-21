@@ -84,6 +84,9 @@ dependencies {
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta")
     testImplementation ("io.mockk:mockk:1.13.10")
     testImplementation ("com.google.truth:truth:1.4.2")
+    val fragment_version = "1.6.2"
+
+    debugImplementation("androidx.fragment:fragment-testing:$fragment_version")
 
 
 

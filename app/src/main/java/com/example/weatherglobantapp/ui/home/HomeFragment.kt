@@ -58,7 +58,6 @@ class HomeFragment : Fragment() {
                     println("-----------------------------> $forecast")
 
                     binding.weatherDetailRecyclerView.apply {
-
                         adapter = it?.let { it1 -> forecast?.let { it2 -> WeatherListAdapter(list = it.weather, forecast = it2) } }
                         layoutManager = LinearLayoutManager(context)
                     }
@@ -73,7 +72,7 @@ class HomeFragment : Fragment() {
         binding.cityName.text =forecast?.city?.name
         binding.windSpeed.text = weather?.wind?.speed?.toString()
         binding.feelsLike.text = "Feels like:${weather?.main?.feels_like}"
-        binding.textView7.text = "${weather?.main?.temp_max}/${weather?.main?.temp_min}"
+        binding.farenheigDivision.text = "${weather?.main?.temp_max}/${weather?.main?.temp_min}"
     }
 
 

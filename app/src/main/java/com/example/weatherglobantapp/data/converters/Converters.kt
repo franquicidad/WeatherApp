@@ -20,7 +20,7 @@ class Converters {
     }
 
     fun convertFarenheitToDegree(temperatureF: Double): Double {
-        return ((temperatureF - 32.0) * 5.0 / 9.0).toDouble()
+        return ((temperatureF * 9/5) + 32)
 
     }
 }
