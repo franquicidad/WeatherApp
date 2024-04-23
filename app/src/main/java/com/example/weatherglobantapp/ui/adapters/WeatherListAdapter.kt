@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherglobantapp.R
 import com.example.weatherglobantapp.data.converters.Converters
 import com.example.weatherglobantapp.dataModel.landing.WeatherX
-import com.example.weatherglobantapp.dataModel.landing.forecast.Detail
 import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
 import com.example.weatherglobantapp.databinding.ItemLandingWeatherBinding
 
@@ -43,7 +42,7 @@ class WeatherListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         val clock = convert.convertTimeToClock(forecast.list[position].dt.toLong()).toString()
         val newClock = clock.substring(11,16)
-        val faren =convert.convertFarenheitToDegree(forecast.list[position].main.temp).toString()
+        val faren =convert.convertDegreeToFarenheigh(forecast.list[position].main.temp).toString()
         val newFaren = faren.substring(0,7)
         binding.hour.text =  newClock
         binding.degrees.text = newFaren + " Fº"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,7 +19,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -84,7 +84,10 @@ class ForecastFragment : Fragment() {
             }
         }
         val forecast by homeViewModel.forecast.collectAsState()
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
             forecast?.let {
                 items(
                     items = it.list,
@@ -94,20 +97,6 @@ class ForecastFragment : Fragment() {
             }
         }
 
-    }
-
-    companion object {
-        const val DATE = "date"
-
-        const val HIGH_TEMP = "highTemp"
-        const val LOW_TEMP = "LowTemp"
-
-        const val WIND_T = "windText"
-        const val WIND_VALUE = "wind"
-        const val NW = "north_west"
-
-        const val ICON = "icon"
-        const val W_DESCRIPTION = "weather"
     }
 
     @Composable
@@ -122,8 +111,13 @@ class ForecastFragment : Fragment() {
             1,
             currentWeatherDes?.length?.minus(1) ?: currentWeatherDes.length
         )
-        ConstraintLayout(modifier = Modifier.background(Color("#008D75".toColorInt())
-        ).fillMaxSize()) {
+        ConstraintLayout(
+            modifier = Modifier
+                .background(
+                    Color("#008D75".toColorInt())
+                )
+                .fillMaxSize()
+        ) {
             val (date,
                 highTemp,
                 lowTemp,
@@ -146,14 +140,22 @@ class ForecastFragment : Fragment() {
                     }
             )
             Text(
-                text = "High Temp:${forecast?.main?.temp_max}º",
+                text = "High Temp:${forecast?.main?.temp_max?.let {
+                    converter.convertDegreeToFarenheigh(
+                        it
+                    )
+                }.also { 
+                    
+                    it?.toString()?.substring(0,4)
+                    println(it?.toString()?.substring(0,4))
+                }}Fº",
                 fontSize = fontSizeView,
-                textAlign = TextAlign.Justify,
                 modifier = Modifier
                     .constrainAs(highTemp) {
                         start.linkTo(parent.start)
                         start.linkTo(parent.start)
-                    }.padding(top = 40.dp, start = 10.dp)
+                    }
+                    .padding(top = 40.dp, start = 10.dp)
             )
             Spacer(modifier = Modifier.padding(start = 60.dp))
             Text(
@@ -172,18 +174,28 @@ class ForecastFragment : Fragment() {
                     modifier = Modifier
                         .constrainAs(icon) {
                             start.linkTo(windText.end)
-                        }.padding(top=30.dp, start = 100.dp), painter = it,
+                            end.linkTo(parent.end)
+                        }
+                        .padding(top = 30.dp, start = 60.dp), painter = it,
                     contentDescription = ""
                 )
             }
 
             Text(
-                text = "Low Temp:${forecast?.main?.temp_min}º",
+                text = "Low Temp:${forecast?.main?.temp_min?.let {
+                    converter.convertDegreeToFarenheigh(
+                        it
+                    )
+                }.also { 
+                    it?.toString()?.substring(0,5)
+                }}Fº",
                 fontSize = fontSizeView,
-                modifier = Modifier.constrainAs(lowTemp) {
-                    top.linkTo(highTemp.bottom)
-                    start.linkTo(parent.start)
-                }.padding(start = 10.dp)
+                modifier = Modifier
+                    .constrainAs(lowTemp) {
+                        top.linkTo(highTemp.bottom)
+                        start.linkTo(parent.start)
+                    }
+                    .padding(start = 10.dp)
             )
             Text(
                 text = "${forecast?.wind?.speed} mph",
@@ -213,11 +225,11 @@ class ForecastFragment : Fragment() {
                 modifier = Modifier
                     .constrainAs(
                         description
-                    ){
+                    ) {
                         top.linkTo(icon.bottom)
                         end.linkTo(icon.end)
                         start.linkTo(icon.start)
-                    }.padding(start = 100.dp)
+                    }
             )
         }
     }

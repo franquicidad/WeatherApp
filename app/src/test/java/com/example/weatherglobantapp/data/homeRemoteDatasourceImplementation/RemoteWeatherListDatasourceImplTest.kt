@@ -1,8 +1,8 @@
-package com.example.weatherglobantapp.data
+package com.example.weatherglobantapp.data.homeRemoteDatasourceImplementation
 
-import com.example.weatherglobantapp.domain.RemoteWeatherListDatasource
+import com.example.weatherglobantapp.data.api.ApiService
+import com.example.weatherglobantapp.domain.remote.RemoteWeatherListDatasource
 import com.example.weatherglobantapp.mocks.Mock
-import com.example.weatherglobantapp.ui.home.HomeViewModel
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.mockk

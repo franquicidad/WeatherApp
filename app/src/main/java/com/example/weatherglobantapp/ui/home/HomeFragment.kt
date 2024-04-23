@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherglobantapp.Util.UserLocation
+import com.example.weatherglobantapp.data.converters.Converters
 import com.example.weatherglobantapp.dataModel.landing.Weather
 import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
 import com.example.weatherglobantapp.databinding.FragmentHomeBinding
@@ -45,20 +46,27 @@ class HomeFragment : Fragment() {
 
         if (container != null) {
             val userLocation = UserLocation()
-            userLocation.getUserLocationClassMethod(container,this) { lat, long ->
+            userLocation.getUserLocationClassMethod(container, this) { lat, long ->
                 homeViewModel.getWeatherList(lat, long)
             }
         }
         homeViewModel.weather.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 homeViewModel.forecast.collect { forecast ->
-                    updateUI(forecast,binding,it)
+                    updateUI(forecast, binding, it)
                     println("-----------------------------> $it")
 
                     println("-----------------------------> $forecast")
 
                     binding.weatherDetailRecyclerView.apply {
-                        adapter = it?.let { it1 -> forecast?.let { it2 -> WeatherListAdapter(list = it.weather, forecast = it2) } }
+                        adapter = it?.let { it1 ->
+                            forecast?.let { it2 ->
+                                WeatherListAdapter(
+                                    list = it.weather,
+                                    forecast = it2
+                                )
+                            }
+                        }
                         layoutManager = LinearLayoutManager(context)
                     }
                 }
@@ -69,12 +77,32 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateUI(forecast: Forecast?, binding: FragmentHomeBinding, weather: Weather?) {
-        binding.cityName.text =forecast?.city?.name
+        val converter = Converters()
+        binding.cityName.text = forecast?.city?.name
         binding.windSpeed.text = weather?.wind?.speed?.toString()
-        binding.feelsLike.text = "Feels like:${weather?.main?.feels_like}"
-        binding.farenheigDivision.text = "${weather?.main?.temp_max}/${weather?.main?.temp_min}"
+        binding.feelsLike.text = "Feels like:${
+            weather?.main?.feels_like?.let {
+                converter.convertDegreeToFarenheigh(
+                    it
+                )
+            }.also { 
+                it.toString().substring(0,4)
+            }
+        }"
+        binding.farenheigDivision.text = "${
+            weather?.main?.temp_max?.let {
+                converter.convertDegreeToFarenheigh(
+                    it
+                )
+            }.also { it.toString().substring(0,4) }
+        }/${
+            weather?.main?.temp_min?.let {
+                converter.convertDegreeToFarenheigh(
+                    it
+                )
+            }.also { it.toString().substring(0,4) }
+        }"
     }
-
 
 
     override fun onDestroyView() {

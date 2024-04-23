@@ -1,4 +1,4 @@
-package com.example.weatherglobantapp.domain
+package com.example.weatherglobantapp.domain.remote
 
 import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
 

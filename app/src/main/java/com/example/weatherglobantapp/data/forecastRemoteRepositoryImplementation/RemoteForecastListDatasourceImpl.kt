@@ -1,8 +1,8 @@
 package com.example.weatherglobantapp.data.forecastRemoteRepositoryImplementation
 
-import com.example.weatherglobantapp.data.ApiService
+import com.example.weatherglobantapp.data.api.ApiService
 import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
-import com.example.weatherglobantapp.domain.RemoteForecastListDatasource
+import com.example.weatherglobantapp.domain.remote.RemoteForecastListDatasource
 import javax.inject.Inject
 
 class RemoteForecastListDatasourceImpl @Inject constructor(private val apiService: ApiService):

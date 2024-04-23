@@ -1,4 +1,4 @@
-package com.example.weatherglobantapp.data
+package com.example.weatherglobantapp.data.api
 
 import com.example.weatherglobantapp.dataModel.landing.Weather
 import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast

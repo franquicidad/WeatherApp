@@ -1,4 +1,4 @@
-package com.example.weatherglobantapp.domain
+package com.example.weatherglobantapp.domain.repository
 
 import com.example.weatherglobantapp.dataModel.landing.Weather
 

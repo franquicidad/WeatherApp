@@ -1,14 +1,11 @@
 package com.example.weatherglobantapp.data
 
-import android.content.res.Resources.NotFoundException
 import com.example.weatherglobantapp.data.homeRemoteDatasourceImplementation.WeatherListRepositoryImpl
-import com.example.weatherglobantapp.domain.RemoteWeatherListDatasource
+import com.example.weatherglobantapp.domain.remote.RemoteWeatherListDatasource
 import com.example.weatherglobantapp.mocks.Mock
 import com.google.common.truth.Truth
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 

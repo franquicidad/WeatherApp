@@ -1,4 +1,4 @@
-package com.example.weatherglobantapp.data
+package com.example.weatherglobantapp.data.api
 
 import okhttp3.Interceptor
 import okhttp3.Response

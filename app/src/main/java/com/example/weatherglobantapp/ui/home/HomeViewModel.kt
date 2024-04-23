@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherglobantapp.dataModel.landing.Weather
 import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
-import com.example.weatherglobantapp.domain.ForecastListRepository
-import com.example.weatherglobantapp.domain.WeatherListRepository
+import com.example.weatherglobantapp.domain.repository.ForecastListRepository
+import com.example.weatherglobantapp.domain.repository.WeatherListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

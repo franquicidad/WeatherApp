@@ -3,11 +3,10 @@ package com.example.weatherglobantapp.ui.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
-import app.cash.turbine.test
 import com.example.weatherglobantapp.dataModel.landing.Weather
 import com.example.weatherglobantapp.dataModel.landing.forecast.Forecast
-import com.example.weatherglobantapp.domain.ForecastListRepository
-import com.example.weatherglobantapp.domain.WeatherListRepository
+import com.example.weatherglobantapp.domain.repository.ForecastListRepository
+import com.example.weatherglobantapp.domain.repository.WeatherListRepository
 import com.example.weatherglobantapp.mocks.Mock
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
